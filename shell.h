@@ -12,3 +12,5 @@
 #include <signal.h>
 
 extern char **environ;
+
+int hello_betty(void);
