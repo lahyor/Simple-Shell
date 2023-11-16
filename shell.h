@@ -14,6 +14,9 @@
 
 int hello_betty(void);
 char *_getinput();
+int exec_command(char **args)
+char **tokenize(char *line)
+int interp(int args, char *argv[])
 int _strcmp(const char *str1, const char *str2);
 int _strlen(char *str);
 int _strncpy(char *dest, char *src, int size);
