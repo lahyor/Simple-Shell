@@ -27,7 +27,23 @@ int interp(int argc, char *argv[])
 		}
 
 		line[strlen(line) - 1] = '\0';
-		args = strtok(line, " ");
+		args = malloc(sizeof(char *) * MAX_ARGS);
+
+		if (args == NULL)
+		{
+			perror("malloc");
+			exit(EXIT_FAILURE);
+		}
+
+		char *token = strtok(line, " ");
+		int i = 0;
+
+		while (token != NULL)
+		{
+			args[i++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[i] = NULL;
 
 		if (args[0] != NULL)
 		{
@@ -39,9 +55,10 @@ int interp(int argc, char *argv[])
 			}
 		}
 
+		free(args);
 		free(line);
 		line = NULL;
 	}
+	return (0)
 
-	return (0);
 }
