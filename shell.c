@@ -1,47 +1,38 @@
 #include "shell.h"
 
-#define PROMPT "simple_shell$ "
-
 /**
- * interp - Entry point
- * @argc: Number of argumets
- * @argv: Array of argumets
+ * main - Entry point
  * Return: Always 0 (success)
  */
 
-int interp(int argc, char *argv[])
+int main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
+	char *insert;
 	char **args;
+	char stats;
 
-	while (1)
-	{
-		printf("%s", PROMPT);
-		ssize_t bytes_read = getline(&line, *len, stdin);
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
+	signal(SIGTSTP, handl_sigtstp);
 
-		if (bytes_read == -1)
+	do {
+		insert  = get_insert();
+		if (!insert || !*insert)
+			break;
+
+		args = tokenize_insert(insert);
+		if (!args || !*args)
 		{
-			printf("\n");
-			exit(0);
+			free(insert);
+			free_token(args);
+			continue;
 		}
+		stats = execute(args);
+		free(insert);
+		free_token(args);
 
-		line[strlen(line) - 1] = '\0';
-		args = strtok(line, " ");
+		stats = 1;
+	} while (stats);
 
-		if (args[0] != NULL)
-		{
-			if (execve(args[0], args, NULL) == -1)
-			{
-				perror("simple_shell");
-				printg("%s", PROMPT);
-				continue;
-			}
-		}
-
-		free(line);
-		line = NULL;
-	}
-
-	return (0);
+	return (EXIT_SUCCESS);
 }
