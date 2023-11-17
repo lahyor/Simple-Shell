@@ -1,104 +1,37 @@
 #include "shell.h"
 
-#define PROMPT "simple_shell$"
-
 /**
- * interp - Entry point
- * @args: Number of artguments
- * @argv: Array of arguments
- * Return: Always 0 (success)
+ * main - Entry point
+ * Return: EXIT_SUCCESS
  */
-
-int interp(int args, char *argv[])
+int main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
+	char *insert;
 	char **args;
+	int stats;
+	
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
+	signal(SIGTSTP, handle_sigtstp);
+	
+	do {
+		insert = get_insert();
+		if (!insert || !*insert)
+			break;
 
-	while (1)
-	{
-		printf("%s", PROMPT);
-		ssize_t bytes_read = getline(&line, &len, stdin);
-
-		if (bytes_read == -1)
+		args = tokenize_insert(insert);
+		if (!args || !*args)
 		{
-			printf("\n");
-			exit(0);
+			free(input);
+			free_tokens(args);
+			continue;
 		}
+		stats = execute(args);
+		free(insert);
+		free_tokens(args);
+		
+		stats = 1;
+	} while (stats);
 
-		line[strlen(line) - 1] = '\0';
-		args = tokenize(line);
-
-		if (args[0] != NULL)
-		{
-			if (exec_command(args) == -1)
-			{
-				perror("simple_shell");
-				printf("%s", PROMPT);
-				continue;
-			}
-		}
-
-		free(args);
-		free(line);
-		line = NULL;
-	}
-
-	return (0);
-}
-
-/**
- * tokenize - Tokenize input line
- * @line: Input line
- * Return: Array of tokens
- */
-
-char **tokenize(char *line)
-{
-	if (args == NULL)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
-
-	char *token = strtok(line, " ");
-	int i = 0;
-
-	while (token != NULL)
-	{
-		args[i++] = token;
-		token = strtok(NULL, " ");
-	}
-	args[i] = NULL;
-
-	return (args);
-}
-
-/**
- * exec_command - Execute the command
- * @args: Array of command
- * Return: Always 0 (success)
- */
-
-int exec_command(char **args)
-{
-	pid_t pid = fork();
-
-	if (pid == 0)
-	{
-		if (execve(args[0], args, NULL) == -1)
-		{
-			exit(EXIT_FAILURE);
-		}
-	} else if (pid < 0)
-	{
-		perror("fork");
-		return (-1);
-	}
-	else
-	{
-		wait(NULL);
-	}
-
-	return (0);
+	return (EXIT_SUCCESS);
 }

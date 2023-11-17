@@ -19,12 +19,12 @@ void free_error(char *argv[], char *arg)
 }
 
 /**
- * free_token - free memory allocated variable
+ * free_tokens - free memory allocated variable
  * @pnt: pointer to allocated memory
  * Return: void
  */
 
-void free_token(char **pnt)
+void free_tokens(char **pnt)
 {
 	int x;
 
