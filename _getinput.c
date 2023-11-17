@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * _getline - Read Input
- *
+ * _getinput - Read Input
  * Return: Always 0 (success)
  */
-char *_getinput()
+
+char *_getinput(void)
 {
 	int i = 0;
 	size_t nread;

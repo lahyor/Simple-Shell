@@ -4,7 +4,7 @@
 
 /**
  * interp - Entry point
- * @argc: Number of artguments
+ * @args: Number of artguments
  * @argv: Array of arguments
  * Return: Always 0 (success)
  */
@@ -50,7 +50,6 @@ int interp(int args, char *argv[])
 /**
  * tokenize - Tokenize input line
  * @line: Input line
- *
  * Return: Array of tokens
  */
 
@@ -72,13 +71,12 @@ char **tokenize(char *line)
 	}
 	args[i] = NULL;
 
-	return(args);
+	return (args);
 }
 
 /**
  * exec_command - Execute the command
  * @args: Array of command
- *
  * Return: Always 0 (success)
  */
 
@@ -96,7 +94,8 @@ int exec_command(char **args)
 	{
 		perror("fork");
 		return (-1);
-	} else
+	}
+	else
 	{
 		wait(NULL);
 	}
