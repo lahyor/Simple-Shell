@@ -9,11 +9,10 @@ int main(void)
 	char *insert;
 	char **args;
 	int stats;
-	
+
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
 	signal(SIGTSTP, handle_sigtstp);
-	
 	do {
 		insert = get_insert();
 		if (!insert || !*insert)
@@ -29,7 +28,6 @@ int main(void)
 		stats = execute(args);
 		free(insert);
 		free_tokens(args);
-		
 		stats = 1;
 	} while (stats);
 

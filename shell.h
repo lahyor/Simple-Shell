@@ -30,11 +30,24 @@ void free_path(void);
 char *get_insert(void);
 void free_last_insert(void);
 char **tokenize(char *str, const char *delim);
-char **tokenize_insert(char *insert)
-int _strcmp(const char *str1, const char *str2);
-int _strlen(char *str);
-int _strncpy(char *dest, char *src, int size);
-void *_memcpy(void *dest, void *src, size_t n);
-void *_realloc(void *ptr, size_t size);
+char **tokenize_insert(char *insert);
+void _puterrors(char *err);
+void _puts(char *str);
+char *_getenv(const char *name);
+int _strlen(const char *);
+int _strcmp(const char *s1, const char *s2);
+int _strncmp(const char *s1, const char *s2, size_t n);
+char *_strstr(char *haystack, char *needle);
+char *_strchr(char *s, char c);
+char *_strcpy(char *, char *);
+char *_strcat(char *, const char *);
+char *_strdup(const char *);
+int _putchar(char);
+unsigned int _strspn(char *s, char *accept);
+int _atoi(const char *str);
+char *_memset(char *, char, unsigned int);
+char *_memcpy(char *dest, char *src, unsigned int n);
+void *_realloc(void *, unsigned int, unsigned int);
+void *_calloc(unsigned int nmemb, unsigned int size);
 
 #endif
