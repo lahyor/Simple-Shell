@@ -18,16 +18,18 @@
 #define PATH_MAX_LENGTH 4096
 #define PATH_SEPERATE ":"
 #define PROMPT "simple_shell$ "
+#include <signal.h>
+#define BUFFER_SIZE 1024
 
 int hello_betty(void);
-int execute(char *argv[]);
-void prompt(void);
+char *_getinput();
+int exec_command(char **args)
+char **tokenize(char *line)
+int interp(int args, char *argv[])
+int _strcmp(const char *str1, const char *str2);
+int _strlen(char *str);
+int _strncpy(char *dest, char *src, int size);
+void *_memcpy(void *dest, void *src, size_t n);
+void *_realloc(void *ptr, size_t size);
 
-
-char *get_path(void);
-
-char *find_in_path(char *command);
-
-void free_error(char *argv[], char *arg);
-void free_token(char **pnt);
-void free_path(void);
+#endif

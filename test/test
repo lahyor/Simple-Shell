@@ -5,7 +5,7 @@
 /**
  * interp - Entry point
  * @argc: Number of artguments
- * @argv: Array of arguments
+ * @argv: Array of argumentss
  * Return: Always 0 (success)
  */
 
