@@ -21,7 +21,7 @@ int main(void)
 		args = tokenize_insert(insert);
 		if (!args || !*args)
 		{
-			free(input);
+			free(insert);
 			free_tokens(args);
 			continue;
 		}

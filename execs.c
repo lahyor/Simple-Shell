@@ -24,7 +24,7 @@ int execute(char *argv[])
 		return (1);
 	}
 	if (sh == -1)
-		perror(argv[0], free_token(argv), free_last_input());
+		perror(argv[0]), free_tokens(argv), free_last_insert();
 	if (sh == 0)
 	{
 		envs[0] = get_path();
@@ -36,7 +36,7 @@ int execute(char *argv[])
 			path = argv[0];
 		if (execve(path, argv, envs) == -1)
 		{
-			perror(argv[0]), free_token(argv), free_last_input();
+			perror(argv[0]), free_tokens(argv), free_last_insert();
 			exit(EXIT_FAILURE);
 		}
 	}

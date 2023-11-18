@@ -27,6 +27,7 @@ char *_strcpy(char *dest, char *src)
  * @src: the source buffer
  * Return: pointer to destination buffer
  */
+
 char *_strcat(char *dest, const char *src)
 {
 	char *ref = dest;
@@ -36,7 +37,7 @@ char *_strcat(char *dest, const char *src)
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
+	return (ref);
 }
 
 /**
@@ -56,7 +57,7 @@ char *_strdup(const char *str)
 	ref = malloc(sizeof(char) * len + 1);
 	if (!ref)
 		return (NULL);
-	for (len; len--;)
+	for (; len--;)
 		ref[len] = *--str;
 	return (ref);
 }

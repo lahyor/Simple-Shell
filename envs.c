@@ -11,7 +11,7 @@ char *_getenv(const char *name)
 	char **envs;
 	size_t name_line = _strlen(name);
 
-	for (envs = environs; *envs != NULL; envs++)
+	for (envs = environ; *envs != NULL; envs++)
 	{
 		if (_strncmp(*envs, name, name_line) == 0 && (*envs)[name_line] == '=')
 		{

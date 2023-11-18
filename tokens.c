@@ -24,7 +24,7 @@ char **tokenize(char *str, const char *delim)
 		if (!(ref[x]))
 			return (NULL);
 
-		_strcpy(ref[i], toke);
+		_strcpy(ref[x], toke);
 		toke = strtok(NULL, delim);
 		x++;
 	}

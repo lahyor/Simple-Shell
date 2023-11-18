@@ -35,13 +35,12 @@ void free_tokens(char **pnt)
 
 /**
  * free_path - free global variables containing path envs
+ * @environs: The environment variables
  * Return: void
  */
 
-void free_path(void)
+void free_path(char **environs)
 {
-	int environs;
-
 	if (environs != NULL)
 	{
 		size_t x = 0;
